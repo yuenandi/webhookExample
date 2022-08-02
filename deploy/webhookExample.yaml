@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webhook-example
+  labels:
+    app: webhook-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webhook-example
+  template:
+    metadata:
+      labels:
+        app: webhook-example
+    spec:
+      serviceAccount: webhook-example
+      containers:
+        - name: webhook-example
+          image: kimoqi/webhook-example:v1
+          imagePullPolicy: Always
+          args:
+            - --namespace=webhook-example
+            - --automatic-authentication=false
+          volumeMounts:
+            - name: webhook-certs
+              mountPath: ~/.webhookExample/pki
+              readOnly: true
+      volumes:
+        - name: webhook-certs
+          secret:
+            secretName: webhook-example

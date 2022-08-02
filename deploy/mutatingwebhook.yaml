@@ -1,0 +1,25 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: webhook-example
+  labels:
+    app: webhook-example
+webhooks:
+  - name: webhook-example.agree.cn
+    clientConfig:
+      service:
+        name: webhook-example
+        namespace: default
+        path: "/mutate"
+      caBundle: ${CA_BUNDLE}
+    admissionReviewVersions: [ "v1beta1" ]
+    sideEffects: None
+    rules:
+      - operations: [ "CREATE" ]
+        apiGroups: ["apps", ""]
+        apiVersions: ["v1"]
+        resources: ["deployments"]
+    namespaceSelector:
+      matchLabels:
+        webhook-example: enabled
+

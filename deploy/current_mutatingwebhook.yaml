@@ -1,0 +1,25 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: webhook-example
+  labels:
+    app: webhook-example
+webhooks:
+  - name: webhook-example.agree.cn
+    clientConfig:
+      service:
+        name: webhook-example
+        namespace: default
+        path: "/mutate"
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5akNDQWJLZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQ0FYRFRJd01EWXhNREV3TURrd00xb1lEekl4TWpBd05URTNNVEF3T1RBeldqQVZNUk13RVFZRApWUVFERXdwcmRXSmxjbTVsZEdWek1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBCnYxK1duSUVSVUhsM0FKNkJjZGlRZ3ltcUtXajd1SVA4MVNBUU5oU2h0YmwrWmowclI4WGMxL0FKeUtUSWxyVC8KUml6OGhNR0pvT0hVeHg5ellmQkQ5aWxZemJiekx3d1I5clFIblBIT1U2MkdPbDNwM0VFaUd4K2IyM0w2cXptaQpHam1mT08zOThNd1l2dDk1VENjc0tmMUFTUkpSdWlxUmNGSExhNHRVOHFXa3VuTEt4WUFadGdLSW9iTm1HOHBuCnpOMVhGQzBveEgybUFhUm9RSEsyM242TSszVjloZzhrd2tyNmViMnByalQrNDRHODY1RFVwTWxlVTRWL25qNGkKVEhRUVBOdUhpZWdwc2dnaGlIQ0ZJcFprUGNJaEZaSGdCb2ZIalRZeWVIaDF4ajFtc3FsVk96cjlvT25hblk5eAppZHN2UDVISy80bXFLQ1JUdVptcGp3SURBUUFCb3lNd0lUQU9CZ05WSFE4QkFmOEVCQU1DQXFRd0R3WURWUjBUCkFRSC9CQVV3QXdFQi96QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFuSlUzUk9JVEoxUlNyZlVNTzR1LzBMZDIKOTNUMC84RzhpbEpMc0hFcCtrS0wxSmJKQytpL2FWVktuRUFBQTBmR3hLOThQTzU1RytiQ2ZIM0E0bVJ5ZzZVegpXamZOQjVKZHFqdUJsOG1Uc294R25QU0pxT0FtT1o2Vy80Z2MvMWRBVDJJNVVMdHY0U1hwazMvRk1IT25DWEZBClAvR3RuT2tITWc4MmFubmwwaUhRaVB3amM2bFBRTTZFVnA1NStscjRLK004Q1g5M3pQQlpoamRXbGFVb3VjMVUKQUwxM2p4MUw2bnhwNUlMbEhCdDVZWTUzR2hJQUhnVTZDVnBMbU5FbzY0WjMxclpjUVc4VjhGMSsxMmtTV3dqQwplS1UwNHhvdlBQeE9HWksrVFA0d25wQmVaZ0hkOEJtUEtlbkpxOFF2SEMyZytNdk5vTWpSM1JndFprcDI3dz09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    admissionReviewVersions: [ "v1beta1" ]
+    sideEffects: None
+    rules:
+      - operations: [ "CREATE" ]
+        apiGroups: ["apps", ""]
+        apiVersions: ["v1"]
+        resources: ["deployments"]
+    namespaceSelector:
+      matchLabels:
+        webhook-example: enabled
+

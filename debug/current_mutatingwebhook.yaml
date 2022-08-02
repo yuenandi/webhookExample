@@ -1,0 +1,24 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: webhook-example-debug
+  labels:
+    app: webhook-example-debug
+webhooks:
+  - name: webhook-example-debug.agree.cn
+    clientConfig:
+      # 修改为masterIP
+#      url: "https://10.8.1.90:6444/mutate"
+      url: https://10.8.1.90:6444/mutate/
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1URXpNREE0TVRrd01Wb1hEVE14TVRFeU9EQTRNVGt3TVZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBUGQwCm43VlNhUklrWDAyenNEbFhnMGRXMVZxZlpSQ1hZTjlNdWk2b1NNN0k2Q2ZoTUlFRm1kRmVXZEJHaFZFY056N3UKR1hjem04ZW9LY2kvSGJQRkJHSFN2cmpwYmkxbG9vQlhjWTI4THhKMkYzNTFsYjcrMEZDd3BNVlRuMG1aNDdaZQpDeWI5RGhKaXNlSjlMWldhRk1lOVNWU2Q2cEgxOTZpQUxNQnoxWFFRbWUzS0FtS0Fzc3lzQmQ2emlVbzhBSzJ0CllkQk5lc1N5VXZiTnEyVzZtZVlwNGtPTmt5YjVMajVEcUJkL2NpaE56QnRVL08rcUEyNEJ3Y1FGKzdxNHp2bGEKVklSaUJnUjBMM1dNM2t6TStBb3kvakV1R25XM3VFSitkOG9NdlBkWUhoaE5sUkF3U1hqN202UlhDMHEwd28rcQpyUjdycGR4b1A1Zi9Md3phbU4wQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZFZ0luRUhPdXY1MDBwSytmMGZyT2NjcXhlY2VNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDY0w4K2IrSVo5NzhubVNwaTROWTJuYmlwTncxZUYzQ2FlWGVnanY5WHRESHJVNmFITgpObXczb084MDgyOTNDOW5vcXdQRUVXcTgxMDF5MGRsaFFNRHJkVXEvMDRMczB5Z1NyL0pzcGlaOTRzRzRiSDNVCkFWODgrckxaQmdzOGZUVFE2Y0dSRzRuREVQSFNpMDMwZVUyNG9uZndjeTh6ZDBkTlBLK2hvdS9hcTR6SkNwckwKakI4VVJwTEUvWTBTVm8vZEwzVWpnN0dvTUhLc2phUWNkczlsdEc1SXp0MzZjL2xDaE1ENWUxT2NTbmJlZ2lRRwpsZ2NGdXlNUzVJNlhJOURmOXpEY0grZG9weW04TS9DWEx5VDNMMmFtbmFnQmp4dlQzbERIQjJXOTdxNnNBZTdOCmpmR216RGoxVEpCdWlHT1hsSXZaVlo3ZExPUFhWTWVBRFVnZAotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    admissionReviewVersions: [ "v1beta1" ]
+    sideEffects: None
+    rules:
+      - operations: [ "CREATE" ]
+        apiGroups: ["apps", ""]
+        apiVersions: ["v1"]
+        resources: ["deployments","services"]
+    namespaceSelector:
+      matchLabels:
+        webhook-example-debug: enabled
+
