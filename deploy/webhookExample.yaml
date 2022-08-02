@@ -17,7 +17,7 @@ spec:
       serviceAccount: webhook-example
       containers:
         - name: webhook-example
-          image: kimoqi/webhook-example:v1
+          image: docker.io/webhook-example:v1
           imagePullPolicy: Always
           args:
             - --namespace=webhook-example

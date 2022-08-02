@@ -5,10 +5,9 @@ metadata:
   labels:
     app: webhook-example-debug
 webhooks:
-  - name: webhook-example-debug.agree.cn
+  - name: webhook-example-debug.github.com
     clientConfig:
-      # 修改为masterIP
-#      url: "https://10.8.1.90:6444/mutate"
+      # 修改为本地IP
       url: ${URL}
       caBundle: ${CA_BUNDLE}
     admissionReviewVersions: [ "v1beta1" ]

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"crypto/tls"
 	"fmt"
 	log "github.com/sirupsen/logrus"
@@ -52,7 +53,7 @@ func main() {
 	<-signalChan
 
 	log.Infof("Got OS shutdown signal, shutting down webhook server gracefully...")
-	//whsvr.Server.Shutdown(context.Background())
+	whsvr.Server.Shutdown(context.Background())
 
 }
 

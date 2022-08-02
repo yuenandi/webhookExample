@@ -8,13 +8,13 @@ type WhSvrParameters struct {
 	Port               int    // webhook server port
 	CertFile           string // path to the x509 certificate for https
 	KeyFile            string // path to the x509 private key matching `CertFile`
-	Logv               int32
-	AutoAuthentication bool
-	Service            string
-	Namespace          string
-	KubeConfig         string
-	IsDebug            bool
-	Url                string
+	Logv               int32  // 日志级别，默认4
+	AutoAuthentication bool   // 是否自动认证，默认true
+	Service            string // 服务的service，默认webhook-example
+	Namespace          string // 命名空间
+	KubeConfig         string // 集群证书
+	IsDebug            bool   // 是否为DEBUG模式
+	Url                string // 本地机器URL，DEBUG模式用到
 }
 
 const (
